@@ -3,7 +3,7 @@
 
 ## Useable File Formats
 
-Can play most common formats for video, audio and images. Sadly, cannot yet play playlists, CDs or DVDs.
+Can play most common formats for video, audio and images. Sadly, cannot yet play MIDI, playlists, CDs or DVDs.
 
 ## Upcoming features
 *Note: Upcoming features may not become reality.*
