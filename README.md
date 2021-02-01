@@ -8,6 +8,5 @@ Can play most common formats for video, audio and images. Sadly, cannot yet play
 ## Upcoming features
 *Note: Upcoming features may not become reality.*
 
-- CD/DVD Playing.
-- Playlisting.
 - Fullscreen mode.
+- Cross-platform versions.
