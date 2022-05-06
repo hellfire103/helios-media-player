@@ -6,6 +6,9 @@ from PyQt5.QtWidgets import (QApplication, QFileDialog, QHBoxLayout, QLabel,
 from PyQt5.QtWidgets import QMainWindow,QWidget, QPushButton, QAction
 from PyQt5.QtGui import QIcon
 import sys
+from yt_dlp import YoutubeDL
+
+ydl = YoutubeDL()
  
 class VideoPlayer(QMainWindow):
     def __init__(self):
@@ -17,6 +20,12 @@ class VideoPlayer(QMainWindow):
         openButton.setStatusTip("Open Video File")
         openButton.setFixedHeight(24)
         openButton.clicked.connect(self.openFile)
+        
+        openURLButton = QPushButton("Open URL")
+        openURLButton.setToolTop("Open URL")
+        openURLButton.setStatusTip("Open URL")
+        openURLButton.setFixedHeight(24)
+        openURLButton.clicked.connect(self.openURL)
  
         self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
  
@@ -82,6 +91,25 @@ class VideoPlayer(QMainWindow):
                     QMediaContent(QUrl.fromLocalFile(fileName)))
             self.playButton.setEnabled(True)
             self.stopButton.setEnabled(True)
+        
+    def openURL(self):
+        fileURL, _ = QtWidgets.QInputDialog.getText(self, "Open URL", "Enter the URL: ")
+        
+        if fileURL != '':
+                if "youtube.com" in fileURL or "youtu.be" in fileURL:
+                        try:
+                                ytURL = ydl.extract_info(ytlink, download=False)
+                                self.mediaPlayer.setMedia(QUrl(ytURL))
+                        except:
+                                handleError()
+                else:
+                        try:
+                                self.mediaPlayer.setMedia(QUrl(fileURL))
+                        except:
+                                handleError()
+                                
+                self.playButton.setEnabled(True)
+                self.stopButton.setEnabled(True)
  
     def exitCall(self):
         self.mediaPlayer.stop()
@@ -106,7 +134,6 @@ class VideoPlayer(QMainWindow):
     def positionChanged(self, position):
         self.positionSlider.setValue(position)
         self.mediaTimer.setText(str(int(position/1000)) + "s")
-        
  
     def durationChanged(self, duration):
         self.positionSlider.setRange(0, duration)
