@@ -1,0 +1,8 @@
+To-Do List
+==========
+
+- Test yt-dlp functionality
+- Implement dark mode
+- Create dependency list
+- Write Makefile
+- Replace upper toolbar with QMenuBar
